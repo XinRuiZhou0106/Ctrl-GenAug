@@ -57,3 +57,15 @@ To support research in medical sequence analysis, we released the synthetic data
 - [Download TUSC-Synthetic (Thyroid, Ultrasound)](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQCmeFizQ-dJS7fthEr7jXHcAZz2AIEKZMQGnzcwVXJAFss?e=tPLb0w)
 - [Download Carotid-Synthetic (Carotid artery, Ultrasound)](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQAhXmrsTIiKRqbsc_NAJc8eASEqrOgJVjW2658vyY856Fw?e=qjs8u5)
 
+## :black_nib: Citation
+
+If you find our repo useful for your research, please consider citing our paper:
+```bibtex
+@article{zhou2024ctrl,
+  title={Ctrl-GenAug: Controllable generative augmentation for medical sequence classification},
+  author={Zhou, Xinrui and Huang, Yuhao and Dou, Haoran and Chen, Shijing and Chang, Ao and Liu, Jia and Long, Weiran and Zheng, Jian and Xu, Erjiao and Ren, Jie and others},
+  journal={arXiv preprint arXiv:2409.17091},
+  year={2024}
+}
+```
+

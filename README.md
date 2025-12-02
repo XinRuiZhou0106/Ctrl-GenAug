@@ -1,5 +1,5 @@
 # Ctrl-GenAug
-This codebase provides the official PyTorch implementation for Ctrl-GenAug: Controllable Generative Augmentation for Medical Sequence Classification
+This codebase provides the official PyTorch implementation for Ctrl-GenAug: Controllable Generative Augmentation for Medical Sequence Classification (Under Review)
 
 [![Ctrl-GenAug-previous-version](https://img.shields.io/badge/Previous%20Version-arXiv-b31b1b?logo=arxiv&logoColor=red)](https://arxiv.org/pdf/2409.17091)
 

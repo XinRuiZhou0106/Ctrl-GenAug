@@ -20,9 +20,30 @@ In this work, we present *Ctrl-GenAug*, a novel and general generative augmentat
   <img src="assets/images/sequence_generator.png">
 </p>
 
-## 🚀 Getting started
+## 🚀 Getting Started
 
-### 🛠️ Installation
+### 1. Installation
+
+Requirements:
+- Python==3.8.13
+- torch==1.12.1+cu116
+- torchvision==0.13.1+cu116
+- transformers==4.34.1
+- tokenizers==0.14.1
+- ffmpeg
+- motion-vector-extractor==1.0.6
+
+You can also create an identical environment to ours using the following command:
+```
+conda env create -f environment.yaml
+```
+
+### 2. Download the Public Real Datasets
+
+- [MosMedData](https://www.kaggle.com/datasets/mathurinache/mosmeddata-chest-ct-scans-with-covid19)
+- [MRNet](https://stanfordmlgroup.github.io/competitions/mrnet/)
+- [ACDC](https://www.creatis.insa-lyon.fr/Challenge/acdc/)
+- [TUSC](https://stanfordaimi.azurewebsites.net/datasets/a72f2b02-7b53-4c5d-963c-d7253220bfd5)
 
 
 
@@ -36,8 +57,3 @@ To support research in medical sequence analysis, we released the synthetic data
 - [Download TUSC-Synthetic (Thyroid, Ultrasound)](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQCmeFizQ-dJS7fthEr7jXHcAZz2AIEKZMQGnzcwVXJAFss?e=tPLb0w)
 - [Download Carotid-Synthetic (Carotid artery, Ultrasound)](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQAhXmrsTIiKRqbsc_NAJc8eASEqrOgJVjW2658vyY856Fw?e=qjs8u5)
 
-To access the public real datasets, please visit:
-- [MosMedData](https://www.kaggle.com/datasets/mathurinache/mosmeddata-chest-ct-scans-with-covid19)
-- [MRNet](https://stanfordmlgroup.github.io/competitions/mrnet/)
-- [ACDC](https://www.creatis.insa-lyon.fr/Challenge/acdc/)
-- [TUSC](https://stanfordaimi.azurewebsites.net/datasets/a72f2b02-7b53-4c5d-963c-d7253220bfd5)

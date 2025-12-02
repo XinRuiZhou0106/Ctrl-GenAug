@@ -27,3 +27,9 @@ To support research in medical sequence analysis, we released the synthetic data
 - [Download ACDC-Synthetic (Heart, Cine-MRI)](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQCLXd3SoF65SqtgYX7cYqCIAfDGrEn1ExZTTo9hVONMv_o?e=jbKdOw)
 - [Download TUSC-Synthetic (Thyroid, Ultrasound)](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQCmeFizQ-dJS7fthEr7jXHcAZz2AIEKZMQGnzcwVXJAFss?e=tPLb0w)
 - [Download Carotid-Synthetic (Carotid artery, Ultrasound)](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQAhXmrsTIiKRqbsc_NAJc8eASEqrOgJVjW2658vyY856Fw?e=qjs8u5)
+
+To access the public real datasets, please visit:
+- [MosMedData](https://www.kaggle.com/datasets/mathurinache/mosmeddata-chest-ct-scans-with-covid19)
+- [MRNet](https://stanfordmlgroup.github.io/competitions/mrnet/)
+- [ACDC](https://www.creatis.insa-lyon.fr/Challenge/acdc/)
+- [TUSC](https://stanfordaimi.azurewebsites.net/datasets/a72f2b02-7b53-4c5d-963c-d7253220bfd5)

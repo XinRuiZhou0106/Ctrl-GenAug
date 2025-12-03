@@ -45,7 +45,34 @@ conda env create -f environment.yaml
 - [ACDC](https://www.creatis.insa-lyon.fr/Challenge/acdc/)
 - [TUSC](https://stanfordaimi.azurewebsites.net/datasets/a72f2b02-7b53-4c5d-963c-d7253220bfd5)
 
+### 3. Pre-process the Real Datasets
 
+We provide the preprocessing scripts and data split information. Please follow the steps below.
+
+#### Step (a) Extract all slices/frames and save their metadata, including file names and labels:
+
+```bash
+# For MosMedData
+python MosMedData/extract_all_slices.py
+```
+
+#### Step (b) Perform uniform sampling based on the data extracted in step (a)
+
+```bash
+# For MosMedData
+python MosMedData/sample_sequences.py \
+    --all_slices_dir <> \
+    --mode <> \
+    --frames_per_clip 15 \
+    --clip_sampling_interval 1 \
+    --required_clip_num 8
+```
+
+```
+--all_slices_dir                              # Output directory containing all slices extracted in step (a)
+--mode                                        # Train and test only
+--frames_per_clip  --clip_sampling_interval   # Please refer to the script for the parameter descriptions
+```
 
 ## Diagnosis-promotive Synthetic Datasets
 

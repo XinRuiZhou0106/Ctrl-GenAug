@@ -1,0 +1,29 @@
+data_name: "MosMed"
+pretrained_model_path: "configs/compress_ratio_8_vae_config"
+output_dir: "your_output_dir"
+image_column: "file_name"
+
+train_data:
+  data_json_path: "MosMedData/MosMed_data/train_metadata.jsonl"
+  width: 256
+  height: 256
+
+test_data:
+  data_json_path: "MosMedData/MosMed_data/test_metadata.jsonl"
+  width: 256
+  height: 256
+
+learning_rate: 1e-4
+lr_scheduler: "cosine"
+lr_warmup_steps: 500
+train_batch_size: 16
+num_workers: 8
+num_train_epochs: 200
+checkpointing_steps: xxx # set on your own
+validation_steps: xxx    # set on your own
+
+seed: 3407
+# mixed_precision: fp16
+gradient_accumulation_steps: 1
+gradient_checkpointing: True
+

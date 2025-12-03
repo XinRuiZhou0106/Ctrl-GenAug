@@ -35,6 +35,7 @@ Requirements:
 
 You can also create an identical environment to ours using the following command:
 ```
+cd ./Ctrl-GenAug
 conda env create -f environment.yaml
 ```
 
@@ -90,21 +91,55 @@ MosMedData/MosMed_volume/test_metadata.jsonl
 #### Step (c) Generate domain-specific image prior features
 
 We extract image prior features for each training frame/slice (e.g., training images in ``MosMedData/MosMed_data``) using the [MedSAM](https://github.com/bowang-lab/MedSAM) image encoder ([base](https://drive.google.com/drive/folders/1ETWmi4AiniJeWOt6HAsYgTjYv_fkgzoN) model). Please refer to their instructions.
-The resulting image priors should be saved in the following form:
+The resulting image priors for *MosMedData* should be saved in the following form; the same applies to other datasets.
 
 ```
-|--MosMedData
-  |--MosMed_data_emb
-    |----study_0001_slice01.npy
-    |----study_0001_slice03.npy
-    |----study_0001_slice05.npy
-    |----...
+Ctrl-GenAug
+└── MosMedData
+    └── MosMed_data_emb
+        ├── study_0001_slice01.npy
+        ├── study_0001_slice03.npy
+        ├── study_0001_slice05.npy
+        └── ...
 ```
 
 #### Step (d) Produce motion fields and sample motion field-based trajectories
 
 ```bash
-python extract_motion_field_trajs.py --clip_data_dir <>   # Directory containing the preprocessed clips from step (b)
+python extract_motion_field_trajs.py --clip_data_dir <>   # Directory containing the pre-processed clips from step (b)
+```
+
+#### Step (e) Arrange all pre-processed data into the following structure to prepare for sequence generator training
+
+```
+Ctrl-GenAug
+├── MosMedData
+│   ├── MosMed_data
+│   │   ├── study_0001_slice01.png
+│   │   ├── study_0001_slice03.png
+│   │   └── ...
+│   ├── MosMed_data_emb
+│   │   ├── study_0001_slice01.npy
+│   │   ├── study_0001_slice03.npy
+│   │   └── ...
+│   ├── MosMed_volume
+│   │   ├── study_0001_s01.avi
+│   │   ├── study_0001_s29.avi
+│   │   └── ...
+│   ├── MosMed_motion_field
+│   │   ├── study_0001_s01.npy
+│   │   ├── study_0001_s29.npy
+│   │   └── ...
+│   └── MosMed_motion_field_trajectory
+│       ├── study_0001_s01.npy
+│       ├── study_0001_s29.npy
+│       └── ...
+├── MRNet
+│   └── ...
+├── ACDC
+│   └── ...
+└── TUSC
+    └── ...
 ```
 
 ## Diagnosis-promotive Synthetic Datasets

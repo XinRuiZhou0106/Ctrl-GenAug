@@ -20,7 +20,7 @@ In this work, we present *Ctrl-GenAug*, a novel and general generative augmentat
   <img src="assets/images/sequence_generator.png">
 </p>
 
-## 🚀 Getting Started
+## 🕹️ Preparations
 
 ### 1. Installation
 
@@ -141,6 +141,13 @@ Ctrl-GenAug
 └── TUSC
     └── ...
 ```
+
+🥳 After completing the preparations, you can proceed to build the *Ctrl-GenAug* framework.
+
+## 🚀 Step 1: Sequence Generator Training
+
+#### 1. VAE model
+
 
 ## Diagnosis-promotive Synthetic Datasets
 

@@ -47,7 +47,7 @@ conda env create -f environment.yaml
 
 ### 3. Pre-process the Real Datasets
 
-We provide the preprocessing scripts and data split information. Please follow the steps below.
+We provide the preprocessing scripts along with our dataset split information. Please follow the steps below.
 
 #### Step (a) Extract all slices/frames and save their metadata, including file names and labels:
 
@@ -72,6 +72,25 @@ python MosMedData/sample_sequences.py \
 --all_slices_dir                              # Output directory containing all slices extracted in step (a)
 --mode                                        # Train and test only
 --frames_per_clip  --clip_sampling_interval   # Please refer to the script for the parameter descriptions
+```
+
+**Note:**
+
+After completing step (b),
+- You can obtain the sampled frames/slices (e.g., ``MosMedData/MosMed_data``) and corresponding metadata labels for training our VAE and sequence generator (**Pretraining Stage**).
+- You can obtain the sampled clips (e.g., ``MosMedData/MosMed_volume``) and corresponding metadata labels for training our sequence generator (**Finetuning Stage**).
+- You may delete the folder ``all_slices_dir``, which is no longer needed, to free storage space.
+
+We have also provided metadata labels based on our dataset split for your reference. Taking *MosMedData* as an example:
+
+```
+# Slice-level metadata for LDM pretraining
+MosMedData/MosMed_data/train_metadata.jsonl
+MosMedData/MosMed_data/test_metadata.jsonl
+
+# Clip-level metadata for Sequence LDM finetuning
+MosMedData/MosMed_volume/train_metadata.jsonl
+MosMedData/MosMed_volume/test_metadata.jsonl
 ```
 
 ## Diagnosis-promotive Synthetic Datasets

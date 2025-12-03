@@ -61,24 +61,18 @@ python MosMedData/extract_all_slices.py
 ```bash
 # For MosMedData
 python MosMedData/sample_sequences.py \
-    --all_slices_dir <> \
-    --mode <> \
-    --frames_per_clip 15 \
-    --clip_sampling_interval 1 \
+    --all_slices_dir <> \          # Directory containing all slices extracted in step (a)
+    --mode <> \                    # Train / test only
+    --frames_per_clip 15 \         # See the script for detailed parameter descriptions
+    --clip_sampling_interval 1 \   # See the script for detailed parameter descriptions
     --required_clip_num 8
-```
-
-```
---all_slices_dir                              # Output directory containing all slices extracted in step (a)
---mode                                        # Train and test only
---frames_per_clip  --clip_sampling_interval   # Please refer to the script for the parameter descriptions
 ```
 
 **Note:**
 
 After completing step (b),
 - You can obtain the sampled frames/slices (e.g., ``MosMedData/MosMed_data``) and corresponding metadata labels for training our VAE and sequence generator (**Pretraining Stage**).
-- You can obtain the sampled clips (e.g., ``MosMedData/MosMed_volume``) and corresponding metadata labels for training our sequence generator (**Finetuning Stage**).
+- You can accordingly obtain the sampled clips (e.g., ``MosMedData/MosMed_volume``) and corresponding metadata labels for training our sequence generator (**Finetuning Stage**).
 - You may delete the folder ``all_slices_dir``, which is no longer needed, to free storage space.
 
 We have also provided metadata labels based on our dataset split for your reference. Taking *MosMedData* as an example:
@@ -91,6 +85,26 @@ MosMedData/MosMed_data/test_metadata.jsonl
 # Clip-level metadata for Sequence LDM finetuning
 MosMedData/MosMed_volume/train_metadata.jsonl
 MosMedData/MosMed_volume/test_metadata.jsonl
+```
+
+#### Step (c) Generate domain-specific image prior features
+
+We extract image prior features for each training frame/slice (e.g., training images in ``MosMedData/MosMed_data``) using the [MedSAM](https://github.com/bowang-lab/MedSAM) image encoder ([base](https://drive.google.com/drive/folders/1ETWmi4AiniJeWOt6HAsYgTjYv_fkgzoN) model). Please refer to their instructions.
+The resulting image priors should be saved in the following form:
+
+```
+|--MosMedData
+  |--MosMed_data_emb
+    |----study_0001_slice01.npy
+    |----study_0001_slice03.npy
+    |----study_0001_slice05.npy
+    |----...
+```
+
+#### Step (d) Produce motion fields and sample motion field-based trajectories
+
+```bash
+python extract_motion_field_trajs.py --clip_data_dir <>   # Directory containing the preprocessed clips from step (b)
 ```
 
 ## Diagnosis-promotive Synthetic Datasets

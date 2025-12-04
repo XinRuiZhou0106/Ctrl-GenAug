@@ -51,6 +51,7 @@ Requirements:
 - Python==3.8.13
 - torch==1.12.1+cu116
 - torchvision==0.13.1+cu116
+- diffusers==0.11.1
 - transformers==4.34.1
 - tokenizers==0.14.1
 - ffmpeg
@@ -59,7 +60,7 @@ Requirements:
 You can also create an identical environment to ours using the following command:
 ```
 cd ./Ctrl-GenAug
-conda env create -f environment.yaml
+conda env create -f environment.yml
 ```
 
 ### 2. Download the Public Real Datasets

@@ -26,10 +26,10 @@ To support research in medical sequence analysis, we provide checkpoints of our 
 
 | **Dataset** | **FVD** | **VAE-Seq** | **Dynamic Smoothness** | **Download** |
 |:-----------:|:-------:|:-----------:|:-----------------------:|:------------:|
-| [MosMedData](https://www.kaggle.com/datasets/mathurinache/mosmeddata-chest-ct-scans-with-covid19) | 2.91 | 84.07% | 96.33% | [ckpt]()|
-| [MRNet](https://stanfordmlgroup.github.io/competitions/mrnet/) | 8.14 | 77.10% | 93.81% | [ckpt]()|
-| [ACDC](https://www.creatis.insa-lyon.fr/Challenge/acdc/) | 8.18 | 77.08% | 92.77% | [ckpt]()|
-| [TUSC](https://stanfordaimi.azurewebsites.net/datasets/a72f2b02-7b53-4c5d-963c-d7253220bfd5) | 3.69 | 92.14% | 95.59% | [ckpt]()|
+| [MosMedData](https://www.kaggle.com/datasets/mathurinache/mosmeddata-chest-ct-scans-with-covid19) | 2.91 | 84.07% | 96.33% | [ckpt](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQBAnJhJQzSST7P2t_vbCYL-AfmwZVNSujgEeTSK_rTbrew?e=V0hh67) |
+| [MRNet](https://stanfordmlgroup.github.io/competitions/mrnet/) | 8.14 | 77.10% | 93.81% | [ckpt](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQAGa4kvpmFMRZ-IzuhiXannAasaKA5K2h2n6FmVUVkxGts?e=7f5KMH) |
+| [ACDC](https://www.creatis.insa-lyon.fr/Challenge/acdc/) | 8.18 | 77.08% | 92.77% | [ckpt](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQAHnyJD9eJCRoMuy81IIyfdAUn9ddhuZ5quIxLeusx2RME?e=0QuERa) |
+| [TUSC](https://stanfordaimi.azurewebsites.net/datasets/a72f2b02-7b53-4c5d-963c-d7253220bfd5) | 3.69 | 92.14% | 95.59% | [ckpt](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQBmXuCS7F74TZLB_dyGOS5YAYJbN3NJnaaPgEgXWNATpvk?e=ZAOK21) |
 
 ## Diagnosis-promotive Synthetic Datasets
 
@@ -74,19 +74,17 @@ We provide the preprocessing scripts along with our dataset split information. P
 #### Step (a) Extract all slices/frames and save their metadata, including file names and labels:
 
 ```bash
-# For MosMedData
-python MosMedData/extract_all_slices.py
+python MosMedData/extract_all_slices.py   # Just modify data paths in the script to use it with other datasets
 ```
 
 #### Step (b) Perform uniform sampling based on the data extracted in step (a)
 
 ```bash
-# For MosMedData
-python MosMedData/sample_sequences.py \
-    --all_slices_dir <> \          # Directory containing all slices extracted in step (a)
-    --mode <> \                    # Train / test only
-    --frames_per_clip 15 \         # See the script for detailed parameter descriptions
-    --clip_sampling_interval 1 \   # See the script for detailed parameter descriptions
+python MosMedData/sample_sequences.py \   # Just modify data paths in the script to use it with other datasets
+    --all_slices_dir <> \                 # Directory containing all slices extracted in step (a)
+    --mode <> \                           # Train / test only
+    --frames_per_clip 15 \                # See the script for detailed parameter descriptions
+    --clip_sampling_interval 1 \          # See the script for detailed parameter descriptions
     --required_clip_num 8
 ```
 

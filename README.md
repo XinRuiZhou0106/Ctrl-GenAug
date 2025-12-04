@@ -153,20 +153,29 @@ Ctrl-GenAug
 Before training the VAE, 
 - Please replace the original VAE version in the diffusers package (``./envs/videodiff/lib/python3.8/site-packages/diffusers/models/vae.py``) with the script provided in this repo (``cond2img/models/vae.py``)
   to ensure compatibility with our pipeline.
-- Please download the [official](https://huggingface.co/CompVis/stable-diffusion-v1-4/tree/main/vae) VAE model (``diffusion_pytorch_model.bin``) and place it in ``configs/compress_ratio_8_vae_config/vae/``.
+- Please download the official VAE [checkpoint](https://huggingface.co/CompVis/stable-diffusion-v1-4/tree/main/vae) (``diffusion_pytorch_model.bin``) and place it in ``configs/compress_ratio_8_vae_config/vae/``.
 
 ```bash
-sh vae_train.sh
+sh vae_train.sh   # we use 4 A6000 gpus by default
 ```
 
-Please modify the VAE configuration path (``vae_config``) in ``vae_train.sh``
+Please modify the VAE configuration path ``vae_config`` in ``vae_train.sh``
 
 #### 2. Pretraining Stage: Multimodal Conditions-Guided Latent Diffusion Model (LDM)
 
 **Note:**
 
 Before training the proposed LDM, 
-- Please download the [official](https://huggingface.co/CompVis/stable-diffusion-v1-4/tree/main/vae) text encoder checkpoint (``diffusion_pytorch_model.bin``) and place it in ``configs/compress_ratio_8_vae_config/vae/``.
+- Please download the official text encoder [checkpoint](https://huggingface.co/CompVis/stable-diffusion-v1-4/tree/main/text_encoder) (``model.safetensors``) and place it in ``configs/compress_ratio_8_sd_config/text_encoder/``
+- Please place your customized trained VAE (including ``config.json`` and ``diffusion_pytorch_model.bin``) in ``configs/compress_ratio_8_sd_config/``, and name the folder ``[your-data]-vae-pretrained``
+- Please download the official unet [checkpoint](https://huggingface.co/CompVis/stable-diffusion-v1-4/tree/main/unet) (``diffusion_pytorch_model.safetensors``) and place it in ``configs/compress_ratio_8_sd_config/unet/``
+- Modify the parameter ``num_class_embeds`` in ``configs/compress_ratio_8_sd_config/unet/config.json`` according to the number of classes in your dataset
+
+```bash
+sh LDM_train.sh   # we use 4 A6000 gpus by default
+```
+
+Please modify the LDM configuration path ``LDM_config`` in ``LDM_train.sh``.
 
 ## Diagnosis-promotive Synthetic Datasets
 

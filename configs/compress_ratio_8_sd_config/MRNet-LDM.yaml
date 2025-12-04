@@ -1,0 +1,48 @@
+data_name: "MRNet"
+pretrained_model_path: "configs/compress_ratio_8_sd_config"
+unet_config_path: null
+output_dir: "your_output_dir"
+caption_column: null
+image_column: "file_name"
+image_condition: True
+image_encode: "MedSAM"
+
+train_data:
+  data_path: "MRNet/MRNet_data"
+  width: 256
+  height: 256
+  keep_all_cond_prob: 0.1
+  drop_all_cond_prob: 0.1
+  drop_each_cond_prob: [0.5] # drop for image prior
+
+validation_data:
+  labels:
+    - 0
+    - 0
+    - 0
+    - 1
+    - 1
+    - 1
+
+  images:
+    - "MRNet/MRNet_data/1131_slice01.png"
+    - "MRNet/MRNet_data/1140_slice41.png"
+    - "MRNet/MRNet_data/1231_slice20.png"  
+    - "MRNet/MRNet_data/1237_slice22.png"
+    - "MRNet/MRNet_data/1177_slice15.png"
+    - "MRNet/MRNet_data/1172_slice07.png"
+
+learning_rate: 1e-4
+lr_scheduler: "cosine"
+lr_warmup_steps: 500
+train_batch_size: 64
+num_workers: 8
+num_train_epochs: 200
+checkpointing_steps: xxx # set on your own
+validation_steps: xxx    # set on your own
+
+seed: 3407
+# mixed_precision: fp16
+use_8bit_adam: False
+gradient_accumulation_steps: 1
+gradient_checkpointing: True

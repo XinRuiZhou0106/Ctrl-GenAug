@@ -1,0 +1,50 @@
+data_name: "ACDC"
+pretrained_model_path: "configs/compress_ratio_8_sd_config"
+unet_config_path: null
+output_dir: "your_output_dir"
+caption_column: null
+image_column: "file_name"
+image_condition: True
+image_encode: "MedSAM"
+
+train_data:
+  data_path: "ACDC/ACDC_data"
+  width: 256
+  height: 256
+  keep_all_cond_prob: 0.1
+  drop_all_cond_prob: 0.1
+  drop_each_cond_prob: [0.5] # drop for image prior
+
+validation_data:
+  labels:
+    - "NOR"
+    - "MINF"
+    - "MINF"
+    - "DCM"
+    - "HCM"
+    - "HCM"
+    - "RV"
+
+  images:
+    - "ACDC/ACDC_data/patient062_frame01_slice10.png"
+    - "ACDC/ACDC_data/patient042_frame01_slice03.png"
+    - "ACDC/ACDC_data/patient143_frame12_slice02.png"  
+    - "ACDC/ACDC_data/patient015_frame01_slice02.png"
+    - "ACDC/ACDC_data/patient023_frame09_slice04.png"
+    - "ACDC/ACDC_data/patient105_frame10_slice04.png"
+    - "ACDC/ACDC_data/patient082_frame01_slice04.png"
+
+learning_rate: 1e-4
+lr_scheduler: "cosine"
+lr_warmup_steps: 500
+train_batch_size: 64
+num_workers: 8
+num_train_epochs: 200
+checkpointing_steps: xxx # set on your own
+validation_steps: xxx    # set on your own
+
+seed: 3407
+# mixed_precision: fp16
+use_8bit_adam: False
+gradient_accumulation_steps: 1
+gradient_checkpointing: True

@@ -229,7 +229,6 @@ python generate.py \
 **Note:**
 
 - We support batch generation. Each worker process uses one GPU and is responsible for processing a designated set of batches (``batch_size``). All batches are processed in parallel by ``num_workers`` worker processes.
-- You should modify the data-related paths in the script before running it.
 - [IMPORTANT] If the sequence generator and the downstream model are trained on the same custom dataset, you should use conditions from the real **training** sequences (rather than the testing ones) to generate synthetic data for downstream tasks.
   This is necessary to avoid data leakage.
 
@@ -239,6 +238,27 @@ python generate.py \
 
 Before filtering, 
 - You should first train a video classifier in the real-data domain under the *Baseline* paradigm. You may use [MMAction2](https://github.com/open-mmlab/mmaction2) for this step.
+- Then, you need to calculate the VAE-Seq values for the entire synthetic database (see our paper for details). Use the following command:
+
+```bash
+python VAE-Seq.py \
+    --load_2d_pretrained_model_name <> \   # Your pretrained LDM
+    --syn_data_p <> \                      # Your synthetic database path
+```
+
+Next, run the following command to perform filtering:
+
+```bash
+python noisy_data_filter.py \
+    --syn_data_p <> \                      # Your synthetic database path
+    --cls_model_name <> \                  # Classifier employed for semantic filtering
+    --cls_model_pth <> \                   # Checkpoint of the classifier used for semantic filtering
+    --load_2d_pretrained_model_name <> \   # Your pretrained LDM
+    --save_base <>                         # Path of the final synthetic databases
+    
+```
+
+We use semantic-filtering classifiers from the MMAction2 framework in the script. Please set up the [MMAction2](https://github.com/open-mmlab/mmaction2) environment to enable execution.
 
 ## Diagnosis-promotive Synthetic Datasets
 

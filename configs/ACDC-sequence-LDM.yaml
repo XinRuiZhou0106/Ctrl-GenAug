@@ -1,0 +1,62 @@
+data_name: "ACDC"
+pretrained_2d_model_path: "your_LDM_dir"
+output_dir: "your_output_dir"
+caption_column: null
+video_column: "file_name"
+image_condition: True
+motion_condition: True
+image_encode: "MedSAM"
+
+train_data:
+  data_path: "ACDC/ACDC_volume"
+  width: 256
+  height: 256
+  keep_all_cond_prob: 0.1
+  drop_all_cond_prob: 0.1
+  drop_each_cond_prob: [0.5, 0.5] # drop for image prior and motion field
+
+validation_data:
+  labels:
+    - "NOR"
+    - "MINF"
+    - "DCM"
+    - "DCM"
+    - "HCM"
+    - "RV"
+
+  videos:
+    - "ACDC/ACDC_volume/patient080_frame01_s01.avi"
+    - "ACDC/ACDC_volume/patient045_frame01_s01.avi"
+    - "ACDC/ACDC_volume/patient106_frame01_s01.avi" 
+    - "ACDC/ACDC_volume/patient020_frame01_s01.avi"
+    - "ACDC/ACDC_volume/patient039_frame01_s01.avi" 
+    - "ACDC/ACDC_volume/patient140_frame09_s09.avi"
+
+  video_length: 8
+  width: 256
+  height: 256
+  num_inference_steps: 200
+  guidance_scale: 7.5
+
+learning_rate: 1e-4
+lr_scheduler: "cosine"
+lr_warmup_steps: 500
+train_batch_size: 8
+num_workers: 8
+num_train_epochs: 200
+checkpointing_steps: xxx # set on your own
+validation_steps: xxx    # set on your own
+trainable_modules:
+  - "attn1"
+  - "motion_encoder"
+  - "insert_unit" 
+  - "multi_modal_attn.attn2.to_q"
+  - "multi_modal_attn.attn_condImage.to_q"
+  - "norm_temp"
+  - "attn_temp"
+
+seed: 3407
+use_8bit_adam: False
+gradient_accumulation_steps: 1
+gradient_checkpointing: True
+enable_xformers_memory_efficient_attention: False

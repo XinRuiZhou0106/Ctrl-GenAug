@@ -148,6 +148,25 @@ Ctrl-GenAug
 
 #### 1. VAE model
 
+**Note:**
+
+Before training the VAE, 
+- Please replace the original VAE version in the diffusers package (``./envs/videodiff/lib/python3.8/site-packages/diffusers/models/vae.py``) with the script provided in this repo (``cond2img/models/vae.py``)
+  to ensure compatibility with our pipeline.
+- Please download the [official](https://huggingface.co/CompVis/stable-diffusion-v1-4/tree/main/vae) VAE model (``diffusion_pytorch_model.bin``) and place it in ``configs/compress_ratio_8_vae_config/vae/``.
+
+```bash
+sh vae_train.sh
+```
+
+Please modify the VAE configuration path (``vae_config``) in ``vae_train.sh``
+
+#### 2. Pretraining Stage: Multimodal Conditions-Guided Latent Diffusion Model (LDM)
+
+**Note:**
+
+Before training the proposed LDM, 
+- Please download the [official](https://huggingface.co/CompVis/stable-diffusion-v1-4/tree/main/vae) text encoder checkpoint (``diffusion_pytorch_model.bin``) and place it in ``configs/compress_ratio_8_vae_config/vae/``.
 
 ## Diagnosis-promotive Synthetic Datasets
 

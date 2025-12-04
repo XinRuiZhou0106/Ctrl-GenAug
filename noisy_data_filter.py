@@ -105,7 +105,7 @@ def compare_inter_video_similarity(saved_data_set, syn_name, latents, video_leng
 
 
 if __name__ == "__main__":
-    # Script for MosMedData. You can modify the model- and data-related paths to filter your own data.
+    # Script for MosMedData. You can modify the data-related paths to filter your own data.
 
     parser = ArgumentParser()
     parser.add_argument('--syn_data_p', type=str, required=True, help='synthetic database path')

@@ -148,8 +148,6 @@ Ctrl-GenAug
 
 #### 1. VAE model
 
-**Note:**
-
 Before training the VAE, 
 - Please replace the original VAE version in the diffusers package (``./envs/videodiff/lib/python3.8/site-packages/diffusers/models/vae.py``) with the script provided in this repo (``cond2img/models/vae.py``)
   to ensure compatibility with our pipeline.
@@ -160,8 +158,6 @@ sh vae_train.sh   # we use 4 A6000 gpus by default
 ```
 
 #### 2. Pretraining Stage: Multimodal Conditions-Guided Latent Diffusion Model (LDM)
-
-**Note:**
 
 Before training the proposed LDM, 
 - Please download the official text encoder [checkpoint](https://huggingface.co/CompVis/stable-diffusion-v1-4/tree/main/text_encoder) (``model.safetensors``) and place it in ``configs/compress_ratio_8_sd_config/text_encoder/``
@@ -174,8 +170,6 @@ sh LDM_train.sh   # we use 4 A6000 gpus by default
 ```
 
 #### 3. Finetuning Stage: Multimodal Conditions-Guided Sequence LDM
-
-**Note:**
 
 Before training the proposed Sequence LDM, 
 - Please ensure that you have completed the pretraining stage and prepared your scheduler, tokenizer, text encoder, VAE, and LDM-UNet in a single folder that follows the structure below:
@@ -234,8 +228,6 @@ python generate.py \
 
 ## ⏳ Step 3: Filter out Noisy Synthetic Cases
 
-**Note:**
-
 Before filtering, 
 - You should first train a video classifier in the real-data domain under the *Baseline* paradigm. You may use [MMAction2](https://github.com/open-mmlab/mmaction2) for this step.
 - Then, you need to calculate the VAE-Seq values for the entire synthetic database (see our paper for details). Use the following command:
@@ -258,6 +250,7 @@ python noisy_data_filter.py \
     
 ```
 
+**Note:**
 We use semantic-filtering classifiers from the MMAction2 framework in the script. Please set up the [MMAction2](https://github.com/open-mmlab/mmaction2) environment to enable execution.
 
 ## Diagnosis-promotive Synthetic Datasets

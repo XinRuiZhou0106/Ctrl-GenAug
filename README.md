@@ -287,3 +287,6 @@ If you find our repo useful for your research, please consider citing our paper:
 }
 ```
 
+## 🤝 Acknowledgement
+
+We sincerely appreciate the code release of the following projects: [diffusers](https://github.com/huggingface/diffusers), [videocomposer](https://github.com/ali-vilab/videocomposer), and [mmaction2](https://github.com/open-mmlab/mmaction2).

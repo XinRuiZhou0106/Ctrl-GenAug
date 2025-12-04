@@ -1,0 +1,1 @@
+Please put your customized VAE settings here, including the configuration file and the checkpoint.

@@ -717,7 +717,7 @@ class AutoencoderKL(ModelMixin, ConfigMixin):
             model_file = os.path.join(pretrained_model_path, WEIGHTS_NAME)
             state_dict = torch.load(model_file, map_location="cpu")
             
-            # If you are training the LDM (Pretraining Stage), please uncomment the following line.
+            # If you are training the LDM or Sequence LDM, please uncomment the following line.
             # model.load_state_dict(state_dict)
             
             # If you are training the VAE, please uncomment the following lines.

@@ -48,9 +48,6 @@ def get_class_syn_names(type, sample_num_each_sam, remaining_sam, data_list_file
     return class_all_syn_names
 
 def safe_load_npy(path, retries=3, wait=1.0):
-    """
-    安全加载 .npy 文件，支持自动重试机制, 防止多个进程同时加载同一份文件
-    """
     for attempt in range(retries):
         try:
             data = np.load(path, allow_pickle=True)[()]
@@ -63,7 +60,6 @@ def safe_load_npy(path, retries=3, wait=1.0):
                 raise
 
 def format_time(seconds: float) -> str:
-    """将秒数格式化为 h m s 格式"""
     h = int(seconds // 3600)
     m = int((seconds % 3600) // 60)
     s = int(seconds % 60)
@@ -226,7 +222,7 @@ def worker_process(worker_idx, batches_per_worker, shared_params):
 
 
 if __name__ == "__main__":
-    # Generation script for MosMedData. You can modify the model- and data-related paths to generate your own data.
+    # Generation script for MosMedData. You can modify the data-related paths to generate your own data.
 
     parser = ArgumentParser()
     parser.add_argument('--load_2d_pretrained_model_name', type=str, required=True, help='your pretrained 2d model')

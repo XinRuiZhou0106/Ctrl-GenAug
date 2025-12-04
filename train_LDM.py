@@ -497,7 +497,7 @@ def main(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", type=str, default="configs/compress_ratio_8_sd_config/MosMed-LDM.yaml")
+    parser.add_argument("--config", type=str, default="")
     args = parser.parse_args()
 
     main(**OmegaConf.load(args.config))

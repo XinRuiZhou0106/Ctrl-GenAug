@@ -31,7 +31,7 @@ To support research in medical sequence analysis, we provide checkpoints of our 
 | [ACDC](https://www.creatis.insa-lyon.fr/Challenge/acdc/) | 8.18 | 77.08% | 92.77% | [ckpt](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQAHnyJD9eJCRoMuy81IIyfdAUn9ddhuZ5quIxLeusx2RME?e=0QuERa) |
 | [TUSC](https://stanfordaimi.azurewebsites.net/datasets/a72f2b02-7b53-4c5d-963c-d7253220bfd5) | 3.69 | 92.14% | 95.59% | [ckpt](https://hkustconnect-my.sharepoint.com/:u:/g/personal/xzhoucv_connect_ust_hk/IQBmXuCS7F74TZLB_dyGOS5YAYJbN3NJnaaPgEgXWNATpvk?e=ZAOK21) |
 
-The extensive downstream classification improvements achieved with *Ctrl-GenAug* are presented in our paper (which is our main focus).
+The extensive downstream classification improvements achieved with *Ctrl-GenAug* are presented in our paper.
 
 ## Diagnosis-promotive Synthetic Datasets
 

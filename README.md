@@ -230,6 +230,8 @@ python generate.py \
 
 - We support batch generation. Each worker process uses one GPU and is responsible for processing a designated set of batches (``batch_size``). All batches are processed in parallel by ``num_workers`` worker processes.
 - You should modify the data-related paths in the script before running it.
+- [IMPORTANT] If the sequence generator and the downstream model are trained on the same custom dataset, you should use conditions from the real training sequences (rather than the testing ones) to generate synthetic data for downstream tasks.
+  This is necessary to avoid data leakage.
 
 ## Diagnosis-promotive Synthetic Datasets
 

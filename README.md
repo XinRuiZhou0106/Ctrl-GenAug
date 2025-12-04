@@ -144,7 +144,7 @@ Ctrl-GenAug
 
 🥳 After completing the preparations, you can proceed to build the *Ctrl-GenAug* framework.
 
-## 🚀 Step 1: Sequence Generator Training
+## 🔥 Step 1: Sequence Generator Training
 
 #### 1. VAE model
 
@@ -158,8 +158,6 @@ Before training the VAE,
 ```bash
 sh vae_train.sh   # we use 4 A6000 gpus by default
 ```
-
-Please modify the VAE configuration path ``vae_config`` in ``vae_train.sh``
 
 #### 2. Pretraining Stage: Multimodal Conditions-Guided Latent Diffusion Model (LDM)
 
@@ -175,14 +173,45 @@ Before training the proposed LDM,
 sh LDM_train.sh   # we use 4 A6000 gpus by default
 ```
 
-Please modify the LDM configuration path ``LDM_config`` in ``LDM_train.sh``.
-
 #### 3. Finetuning Stage: Multimodal Conditions-Guided Sequence LDM
 
 **Note:**
 
-Before training the proposed LDM, 
-- 
+Before training the proposed Sequence LDM, 
+- Please ensure that you have completed the pretraining stage and prepared your scheduler, tokenizer, text encoder, VAE, and LDM-UNet in a single folder that follows the structure below:
+```
+pretrained_2d_model_[your-data]
+├── [your-data]-vae-pretrained
+│   ├── config.json
+│   └── diffusion_pytorch_model.bin
+├── scheduler
+│   └── scheduler_config.json
+├── text_encoder
+│   ├── config.json
+│   └── model.safetensors
+├── tokenizer
+│   ├── merges.txt
+│   ├── special_tokens_map.json
+│   ├── tokenizer_config.json
+│   └── vocab.json
+└── unet
+    ├── config.json
+    └── diffusion_pytorch_model.bin   # your trained unet2d
+```
+This folder corresponds to the parameter ``pretrained_2d_model_path`` in the Sequence LDM configuration ``sequence_LDM_config`` used in ``sequence_LDM_train.sh``.
+
+- Please add the three lines below to your trained unet2d configuration file ``pretrained_2d_model_[your-data]/unet/config.json``:
+```
+"self_attn_mode": "SAM",   # our sequential augmentation module
+"insert_strategy": "concat",   # concat the latent features with motion fields
+"motion_condition": true
+```
+
+```bash
+sh sequence_LDM_train.sh   # we use 4 A6000 gpus by default
+```
+
+## 🚀 Step 2: Generate Synthetic Sequences
 
 ## Diagnosis-promotive Synthetic Datasets
 

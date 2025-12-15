@@ -80,6 +80,9 @@ We provide the preprocessing scripts along with our dataset split information. P
 # For MosMedData
 python MosMedData/extract_all_slices.py
 
+# For MRNet
+python MRNet/extract_all_slice.py
+
 # For TUSC
 python TUSC/extract_all_images.py
 python TUSC/save_all_consecutive_images.py   # Delete non-consecutive frames in the original dataset
@@ -97,6 +100,14 @@ python MosMedData/sample_sequences.py \
     --clip_sampling_interval 1 \                      # See the script for detailed parameter descriptions
     --required_clip_num 8
 
+# For MRNet
+python MRNet/sample_sequences.py \
+    --all_slices_dir MRNet/MRNet_all_slices \
+    --mode <> \
+    --frames_per_clip 15 \
+    --clip_sampling_interval 1 \
+    --required_clip_num 8
+
 # For TUSC
 python TUSC/sample_videos.py \
     --all_frames_dir TUSC/TUSC_all_images_consecutive \
@@ -111,7 +122,7 @@ python TUSC/sample_videos.py \
 After completing step (b),
 - You can obtain the sampled frames/slices (e.g., ``MosMedData/MosMed_data``) and corresponding metadata for training our VAE and sequence generator (**Pretraining Stage**).
 - You can accordingly obtain the sampled clips (e.g., ``MosMedData/MosMed_volume``) and corresponding metadata for training our sequence generator (**Finetuning Stage**).
-- You may delete the folder ``all_slices_dir`` (or the folders ``TUSC_all_images`` and ``TUSC_all_images_consecutive`` for TUSC only), which is no longer needed, to free storage space.
+- You may delete the folder ``<dataset>_all_slices`` (or the folders ``TUSC_all_images`` and ``TUSC_all_images_consecutive`` for TUSC only), which is no longer needed, to free storage space.
 
 We have also provided metadata labels based on our dataset split for your reference. Taking *MosMedData* as an example:
 

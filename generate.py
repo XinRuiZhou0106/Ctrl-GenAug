@@ -222,7 +222,7 @@ def worker_process(worker_idx, batches_per_worker, shared_params):
 
 
 if __name__ == "__main__":
-    # Generation script for MosMedData. You can modify the data-related paths to generate your own data.
+    # Generation script for MosMedData. You can modify the data paths and conditional control variables to generate your own data.
 
     parser = ArgumentParser()
     parser.add_argument('--load_2d_pretrained_model_name', type=str, required=True, help='your pretrained 2d model')

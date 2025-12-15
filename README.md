@@ -81,10 +81,10 @@ We provide the preprocessing scripts along with our dataset split information. P
 python MosMedData/extract_all_slices.py
 
 # For MRNet
-python MRNet/extract_all_slice.py
+python MRNet/extract_all_slices.py
 
 # For ACDC
-python ACDC/extract_all_slice.py
+python ACDC/extract_all_slices.py
 
 # For TUSC
 python TUSC/extract_all_images.py
@@ -219,10 +219,10 @@ sh vae_train.sh   # we use 4 A6000 gpus by default
 #### 2. Pretraining Stage: Multimodal Conditions-Guided Latent Diffusion Model (LDM)
 
 Before training the proposed LDM, 
-- Please download the official text encoder [checkpoint](https://huggingface.co/CompVis/stable-diffusion-v1-4/tree/main/text_encoder) (``model.safetensors``) and place it in ``configs/compress_ratio_8_sd_config/text_encoder/``
-- Please place your customized trained VAE (including ``config.json`` and ``diffusion_pytorch_model.bin``) in ``configs/compress_ratio_8_sd_config/``, and name the folder ``[your-data]-vae-pretrained``
-- Please download the official unet [checkpoint](https://huggingface.co/CompVis/stable-diffusion-v1-4/tree/main/unet) (``diffusion_pytorch_model.safetensors``) and place it in ``configs/compress_ratio_8_sd_config/unet/``
-- Modify the parameter ``num_class_embeds`` in ``configs/compress_ratio_8_sd_config/unet/config.json`` according to the number of classes in your dataset
+- Please download the official text encoder [checkpoint](https://huggingface.co/CompVis/stable-diffusion-v1-4/tree/main/text_encoder) (``model.safetensors``) and place it in ``configs/compress_ratio_8_sd_config/text_encoder/``.
+- Please place your customized trained VAE (including ``config.json`` and ``diffusion_pytorch_model.bin``) in ``configs/compress_ratio_8_sd_config/``, and name the folder ``[your-data]-vae-pretrained``.
+- Please download the official unet [checkpoint](https://huggingface.co/CompVis/stable-diffusion-v1-4/tree/main/unet) (``diffusion_pytorch_model.safetensors``) and place it in ``configs/compress_ratio_8_sd_config/unet/``.
+- Modify the parameter ``num_class_embeds`` in ``configs/compress_ratio_8_sd_config/unet/config.json`` according to the number of classes in your dataset.
 
 ```bash
 sh LDM_train.sh   # we use 4 A6000 gpus by default
@@ -249,11 +249,11 @@ pretrained_2d_model_[your-data]
 │   └── vocab.json
 └── unet
     ├── config.json
-    └── diffusion_pytorch_model.bin   # your trained unet2d
+    └── diffusion_pytorch_model.bin   # your trained LDM-UNet
 ```
-This folder corresponds to the parameter ``pretrained_2d_model_path`` in the Sequence LDM configuration ``sequence_LDM_config`` used in ``sequence_LDM_train.sh``.
+This folder's path corresponds to the parameter ``pretrained_2d_model_path`` in the Sequence LDM configuration ``sequence_LDM_config`` used in ``sequence_LDM_train.sh``.
 
-- Please add the three lines below to your trained unet2d configuration file ``pretrained_2d_model_[your-data]/unet/config.json``:
+- Please add the three lines below to your trained LDM-UNet configuration file ``pretrained_2d_model_[your-data]/unet/config.json``:
 ```
 "self_attn_mode": "SAM",   # our sequential augmentation module
 "insert_strategy": "concat",   # concat the latent features with motion fields
@@ -281,15 +281,15 @@ python generate.py \
 
 **Note:**
 
-- We support batch generation. Each worker process uses one GPU and is responsible for processing a designated set of batches (``batch_size``). All batches are processed in parallel by ``num_workers`` worker processes.
+- We support batch generation by ``num_workers`` parallel worker processes. Each worker process uses one GPU and is responsible for processing a designated set of batches (``batch_size``).
 - [IMPORTANT] If the sequence generator and the downstream model are trained on the same custom dataset, you should use conditions from the real **training** sequences (rather than the testing ones) to generate synthetic data for downstream tasks.
   This is necessary to avoid data leakage.
 
-## ⏳ Step 3: Filter out Noisy Synthetic Cases
+## ⏳ Step 3: Filter Out Noisy Synthetic Cases
 
 Before filtering, 
 - You should first train a video classifier in the real-data domain under the *Baseline* paradigm. You may use [MMAction2](https://github.com/open-mmlab/mmaction2) for this step.
-- Then, you need to calculate the VAE-Seq values for the entire synthetic database (see our paper for details). Use the following command:
+- Then, you need to calculate the VAE-Seq values for the entire synthetic database (see our paper for details) using the following command:
 
 ```bash
 python VAE-Seq.py \
@@ -310,7 +310,7 @@ python noisy_data_filter.py \
 ```
 
 **Note:**
-We use semantic-filtering classifiers from the MMAction2 framework in the script. Please set up the [MMAction2](https://github.com/open-mmlab/mmaction2) environment to enable execution.
+We use classifiers from the MMAction2 framework in the script to perform semantic filtering. Please set up the [MMAction2](https://github.com/open-mmlab/mmaction2) environment to enable execution.
 
 ## :black_nib: Citation
 

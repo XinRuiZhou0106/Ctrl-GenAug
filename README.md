@@ -74,29 +74,44 @@ conda env create -f environment.yml
 
 We provide the preprocessing scripts along with our dataset split information. Please follow the steps below.
 
-#### Step (a) Extract all slices/frames and save their metadata, including file names and labels:
+#### Step (a) Extract all slices/frames and save their metadata, including file names, texts (TUSC only), and labels:
 
 ```bash
-python MosMedData/extract_all_slices.py   # Just modify data paths in the script to use it with other datasets
+# For MosMedData
+python MosMedData/extract_all_slices.py
+
+# For TUSC
+python TUSC/extract_all_images.py
+python TUSC/save_all_consecutive_images.py   # Delete non-consecutive frames in the original dataset
+python TUSC/extract_all_texts.py   # Generate texts
 ```
 
 #### Step (b) Perform uniform sampling based on the data extracted in step (a)
 
 ```bash
-python MosMedData/sample_sequences.py \   # Just modify data paths in the script to use it with other datasets
-    --all_slices_dir <> \                 # Directory containing all slices extracted in step (a)
-    --mode <> \                           # Train / test only
-    --frames_per_clip 15 \                # See the script for detailed parameter descriptions
-    --clip_sampling_interval 1 \          # See the script for detailed parameter descriptions
+# For MosMedData
+python MosMedData/sample_sequences.py \   
+    --all_slices_dir MosMedData/MosMed_all_slices \   # Directory containing all slices extracted in step (a)
+    --mode <> \                                       # Train / test only
+    --frames_per_clip 15 \                            # See the script for detailed parameter descriptions
+    --clip_sampling_interval 1 \                      # See the script for detailed parameter descriptions
     --required_clip_num 8
+
+# For TUSC
+python TUSC/sample_videos.py \
+    --all_frames_dir TUSC/TUSC_all_images_consecutive \
+    --mode <> \
+    --frames_per_clip 15 \
+    --clip_sampling_interval 1 \
+    --required_clip_num 8 \
 ```
 
 **Note:**
 
 After completing step (b),
-- You can obtain the sampled frames/slices (e.g., ``MosMedData/MosMed_data``) and corresponding metadata labels for training our VAE and sequence generator (**Pretraining Stage**).
-- You can accordingly obtain the sampled clips (e.g., ``MosMedData/MosMed_volume``) and corresponding metadata labels for training our sequence generator (**Finetuning Stage**).
-- You may delete the folder ``all_slices_dir``, which is no longer needed, to free storage space.
+- You can obtain the sampled frames/slices (e.g., ``MosMedData/MosMed_data``) and corresponding metadata for training our VAE and sequence generator (**Pretraining Stage**).
+- You can accordingly obtain the sampled clips (e.g., ``MosMedData/MosMed_volume``) and corresponding metadata for training our sequence generator (**Finetuning Stage**).
+- You may delete the folder ``all_slices_dir`` (or the folders ``TUSC_all_images`` and ``TUSC_all_images_consecutive`` for TUSC only), which is no longer needed, to free storage space.
 
 We have also provided metadata labels based on our dataset split for your reference. Taking *MosMedData* as an example:
 

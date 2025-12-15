@@ -83,6 +83,9 @@ python MosMedData/extract_all_slices.py
 # For MRNet
 python MRNet/extract_all_slice.py
 
+# For ACDC
+python ACDC/extract_all_slice.py
+
 # For TUSC
 python TUSC/extract_all_images.py
 python TUSC/save_all_consecutive_images.py   # Delete non-consecutive frames in the original dataset
@@ -106,6 +109,14 @@ python MRNet/sample_sequences.py \
     --mode <> \
     --frames_per_clip 15 \
     --clip_sampling_interval 1 \
+    --required_clip_num 8
+
+# For ACDC
+python ACDC/sample_sequences.py \
+    --all_slices_dir ACDC/ACDC_all_slices \
+    --mode <> \
+    --frames_per_clip 8 \
+    --clip_sampling_interval 0 \
     --required_clip_num 8
 
 # For TUSC

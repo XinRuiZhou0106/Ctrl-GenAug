@@ -135,7 +135,7 @@ After completing step (b),
 - You can accordingly obtain the sampled clips (e.g., ``MosMedData/MosMed_volume``) and corresponding metadata for training our sequence generator (**Finetuning Stage**).
 - You may delete the folder ``<dataset>_all_slices`` (or the folders ``TUSC_all_images`` and ``TUSC_all_images_consecutive`` for TUSC only), which is no longer needed, to free storage space.
 
-We have also provided metadata labels based on our dataset split for your reference. Taking *MosMedData* as an example:
+We have also provided metadata files based on our dataset split for your reference. Taking *MosMedData* as an example:
 
 ```
 # Slice-level metadata for LDM pretraining
